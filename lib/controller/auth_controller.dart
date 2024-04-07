@@ -21,47 +21,20 @@
 import 'package:get/get.dart';
 
 import '../data/api/api_client.dart';
+import '../data/model/body/login_body.dart';
+import '../data/repository/auth_repo.dart';
 
 
+class AuthController extends GetxController implements GetxService {
+  final AuthRepo authRepo;
+  AuthController({required this.authRepo}) ;
 
-// class AuthController extends GetxController {
-//   final ApiClient apiClient = ApiClient();
-//
-//   // Future<void> login(String email, String password) async {
-//   //   try {
-//   //     final response = await apiClient.login( email: email, password: password);
-//   //     print("Login successful: $response"); // Add this line for debugging
-//   //     // Handle successful login response here
-//   //   } catch (e) {
-//   //     print("Login error: $e"); // Add this line for debugging
-//   //     // Handle login error
-//   //   }
-//   // }
-//   Future<Map<String, dynamic>> login({
-//     required String email,
-//     required String password,
-//   }) async {
-//     var body = {
-//       'email': email,
-//       'password': password,
-//     };
-//     return await apiClient.postData('login', body);
-//   }
-// }
-//
-
-
-class AuthController extends GetxController {
-  final ApiClient apiClient = ApiClient();
-
-  Future<Map<String, dynamic>> login({
-    required String email,
-    required String password,
-  }) async {
-    var body = {
-      'email': email,
-      'password': password,
-    };
-    return await apiClient.postData('login', body);
+  Future<Map<String, dynamic>> login(String? email , String password ) async {
+    // var body = {
+    //   'email': email,
+    //   'password': password,
+    // };
+    return await authRepo.login(email, password);
   }
 }
+
